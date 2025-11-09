@@ -27,6 +27,16 @@ void init() {
 
     glColor3f(1.0f, 1.0f, 1.0f);
 
+    // Classic OpenGL antialiasing setup for line primitives
+    glEnable(GL_LINE_SMOOTH);
+    glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glLineWidth(1.5f);
+#ifdef GL_MULTISAMPLE
+    glEnable(GL_MULTISAMPLE);
+#endif
+
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(0.0, 640.0, 0.0, 480.0);
@@ -41,7 +51,7 @@ void init() {
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
 
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_MULTISAMPLE);
 
     glutInitWindowSize(640, 480);
     glutInitWindowPosition(100, 150);
