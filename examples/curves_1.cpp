@@ -4,19 +4,37 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 
+#include <cmath>
+
+#define INTERVAL_SIZE 100
+const float PI = 3.14159265358979323846;
 
 void displayFunc();
 
+float interval[INTERVAL_SIZE];
+
+float x(float t) {
+    return std::sin(3.0f*t);
+}
+
+float y(float t) {
+    return std::cos(2.0f*t);
+}
+
 
 void init() {
-    glClearColor(1.0, 1.0, 1.0, 0.0);
+    glClearColor(0.0, 0.0, 0.0, 0.0);
 
-    glColor3f(0.0f, 0.0f, 0.0f);
-    glPointSize(4.0);
+    glColor3f(1.0f, 1.0f, 1.0f);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(0.0, 640.0, 0.0, 480.0);
+
+    float fIntervalSize = (float) INTERVAL_SIZE;
+    for (int i = 0; i < INTERVAL_SIZE; i++) {
+        interval[i] = ((float) i) / fIntervalSize * 2.0f * PI;
+    }
 }
 
 
@@ -42,9 +60,17 @@ int main(int argc, char** argv) {
 void displayFunc() {
     glClear(GL_COLOR_BUFFER_BIT);
 
+    float scale = 100.0f;
     glBegin(GL_LINES);
-        glVertex2i(100, 50);
-        glVertex2i(100, 130);
+        for (int i = 1; i < INTERVAL_SIZE; i++) {
+            glVertex2f(
+                320.0f + scale*x(interval[i - 1]),
+                240.0f + scale*y(interval[i - 1]));
+
+            glVertex2f(
+                320.0f + scale*x(interval[i]),
+                240.0f + scale*y(interval[i]));
+        }
     glEnd();
 
     glFlush();
