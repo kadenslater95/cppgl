@@ -2,5 +2,6 @@
 sandbox
 
 *.a
+*.o
 
 build

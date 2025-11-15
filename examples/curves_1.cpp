@@ -6,12 +6,16 @@
 
 #include <cmath>
 
+#include "data_types.h"
+
 #define INTERVAL_SIZE 100
 const float PI = 3.14159265358979323846;
 
 void displayFunc();
 
 float interval[INTERVAL_SIZE];
+
+cppgl::Point2f a;
 
 float x(float t) {
     return std::sin(3.0f*t);

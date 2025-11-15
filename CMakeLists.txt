@@ -4,8 +4,9 @@ project(cppgl)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Adding include and Google test later on
-#include_directories(include)
+# TODO: Add Google test
+
+include_directories(include)
 
 #add_subdirectory(src)
 #add_subdirectory(test)
